@@ -1,0 +1,326 @@
+
+UC 1
+      Ability to create a
+Address Book Service
+
+DB
+
+- Use SQL Client to create DB
+   and DB records
+
+mysql> create database address_book_service;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| address_book_service |
+| college              |
+| information_schema   |
+| mysql                |
+| payroll_service      |
+| performance_schema   |
+| rfp                  |
+| rfp11                |
+| rfp12                |
+| rfp155               |
+| sakila               |
+| sys                  |
+| tanuja               |
+| world                |
++----------------------+
+14 rows in set (0.01 sec)
+
+mysql> use address_book_service;
+Database changed
+
+=============================================================================================================================================================
+
+UC 2
+     Ability to create a Address
+Book Table with first and
+last names, address, city,
+state, zip, phone number
+and email as its attributes
+
+mysql> CREATE TABLE Address_Book(firstname varchar(55),lastname varchar(55),address varchar(55),city varchar(25), state varchar(30), zip int, phone varchar(55), email varchar(55));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++--------------------------------+
+| Tables_in_address_book_service |
++--------------------------------+
+| address_book                   |
++--------------------------------+
+1 row in set (0.01 sec)
+
+mysql> describe Address_Book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| firstname | varchar(55) | YES  |     | NULL    |       |
+| lastname  | varchar(55) | YES  |     | NULL    |       |
+| address   | varchar(55) | YES  |     | NULL    |       |
+| city      | varchar(25) | YES  |     | NULL    |       |
+| state     | varchar(30) | YES  |     | NULL    |       |
+| zip       | int         | YES  |     | NULL    |       |
+| phone     | varchar(55) | YES  |     | NULL    |       |
+| email     | varchar(55) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+============================================================================================================================================================================================
+
+UC 3
+      
+      Ability to insert new
+Contacts to Address
+Book
+
+mysql> insert into Address_Book(firstName,lastName,address,city,state,zip,phone,email) values ("Tanuja", "Chaugule", "Vasai", "Mumbai", "Maharashtra", 400014, "987654321", "abc@xyz.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Address_Book;
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+1 row in set (0.00 sec)
+===========================================================================================================================================================================================================
+
+UC 4
+
+     Ability to edit
+existing contact
+person using their
+name
+ 
+mysql> update Address_Book set phone = "123456789" where firstName = "Tanuja";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Address_Book;
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 123456789 | abc@xyz.com |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+1 row in set (0.00 sec)
+===============================================================================================================================================
+
+UC 5
+
+     Ability to delete a
+person using person's
+name
+
+mysql> delete from Address_Book where firstName= "Tanuja";
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Address_Book;
+Empty set (0.00 sec)
+============================================================================================================================================================
+
+UC 6
+   
+    Ability to Retrieve
+Person belonging to
+a City or State from
+the Address Book
+
+mysql> insert into Address_Book(firstName,lastName,address,city,state,zip,phone,email) values ("Tanuja", "Chaugule", "Vasai", "Mumbai", "Maharashtra", 400014, "987654321", "abc@xyz.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Address_Book;
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Address_Book where city= "Mumbai";
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+1 row in set (0.00 
+
+mysql> select * from Address_Book where state= "Maharashtra";
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Address_Book where state= "Panjab";
++-----------+----------+---------+------+--------+--------+-----------+-------------+
+| firstname | lastname | address | city | state  | zip    | phone     | email       |
++-----------+----------+---------+------+--------+--------+-----------+-------------+
+| Apurva    | Dhaigave | Katraj  | pune | Panjab | 413308 | 123456789 | xyz@pqr.com |
++-----------+----------+---------+------+--------+--------+-----------+-------------+
+1 row in set (0.00 sec)
+=======================================================================================================================================================================
+
+UC 7
+  
+      Ability to understand
+the size of address
+
+book by City and State
+- Here size indicates the count
+
+
+mysql> select count(*) from Address_Book where city = "Mumbai";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from Address_Book where state = "Maharashtra";
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Address_Book;
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com |
+| Apurva    | Dhaigave | Katraj  | pune   | Maharashtra | 413308 | 123456789 | xyz@pqr.com |
+| Apurva    | Dhaigave | Katraj  | pune   | Panjab      | 413308 | 123456789 | xyz@pqr.com |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+
+3 rows in set (0.00 sec)
+====================================================================================================================================================
+
+UC 8
+ 
+     Ability to retrieve entries
+sorted alphabetically by
+Person’s name for a
+
+given city
+       
+
+mysql> select * from Address_Book where city = "Pune" order by firstName desc;
++-----------+----------+---------+------+-------------+--------+-----------+-------------+
+| firstname | lastname | address | city | state       | zip    | phone     | email       |
++-----------+----------+---------+------+-------------+--------+-----------+-------------+
+| Apurva    | Dhaigave | Katraj  | pune | Maharashtra | 413308 | 123456789 | xyz@pqr.com |
+| Apurva    | Dhaigave | Katraj  | pune | Panjab      | 413308 | 123456789 | xyz@pqr.com |
++-----------+----------+---------+------+-------------+--------+-----------+-------------+
+2 rows in set (0.00 sec)
+===============================================================================================================================================
+
+UC 9
+ 
+      Ability to identify each
+Address Book with name and
+Type. - Here the type could Family, Friends,
+Profession, etc
+- Alter Address Book to add name and
+
+type
+
+mysql> alter table Address_Book add type VARCHAR(55);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update Address_Book set type = "proffession" where firstName = 'Tanuja';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+mysql> update Address_Book set type = "proffession" where firstName = 'Apurva';
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+
+============================================================================================================================================================
+
+UC 10
+
+    Ability to get number
+of contact persons
+i.e. count by type
+
+mysql> update Address_Book set type = "proffession" where firstName = 'Tanuja';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Address_Book set type = "proffession" where firstName = 'Apurva';
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select count(*) from Address_Book where type = 'proffession';
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Address_Book;
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+-------------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       | type        |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+-------------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com | proffession |
+| Apurva    | Dhaigave | Katraj  | pune   | Maharashtra | 413308 | 123456789 | xyz@pqr.com | proffession |
+| Apurva    | Dhaigave | Katraj  | pune   | Panjab      | 413308 | 123456789 | xyz@pqr.com | proffession |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+-------------+
+3 rows in set (0.00 sec)
+===================================================================================================================================================
+
+UC 11
+
+        Ability to add person
+
+to both Friend and
+
+Family
+
+
+mysql> alter table Address_Book add family VARCHAR(55);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Address_Book add friends VARCHAR(55);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Address_Book;
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+-------------+--------+---------+
+| firstname | lastname | address | city   | state       | zip    | phone     | email       | type        | family | friends |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+-------------+--------+---------+
+| Tanuja    | Chaugule | Vasai   | Mumbai | Maharashtra | 400014 | 987654321 | abc@xyz.com | proffession | NULL   | NULL    |
+| Apurva    | Dhaigave | Katraj  | pune   | Maharashtra | 413308 | 123456789 | xyz@pqr.com | proffession | NULL   | NULL    |
+| Apurva    | Dhaigave | Katraj  | pune   | Panjab      | 413308 | 123456789 | xyz@pqr.com | proffession | NULL   | NULL    |
++-----------+----------+---------+--------+-------------+--------+-----------+-------------+-------------+--------+---------+
+3 rows in set (0.00 sec)
+===========================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
